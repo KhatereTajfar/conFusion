@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Dish } from '../shared/dish';
+import { DishService } from '../services/dish.service';
 
 @Component({
   selector: 'app-dishdetail',
@@ -9,7 +10,7 @@ import { Dish } from '../shared/dish';
 export class DishdetailComponent implements OnInit {
     @Input()
     dish = Dish;
-  constructor() { }
+  constructor(private dishservice: DishService) { }
 
   ngOnInit() {
   }
