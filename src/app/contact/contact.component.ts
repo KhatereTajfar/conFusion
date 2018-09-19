@@ -79,7 +79,6 @@ export class ContactComponent implements OnInit {
       contacttype: 'None',
       message: ''
     });
-    this.feedbackFormDirective.resetForm();
   }
   onValueChanged(data?: any) {
     if (!this.feedbackForm) { return; }
