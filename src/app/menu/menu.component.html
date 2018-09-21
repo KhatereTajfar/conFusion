@@ -12,9 +12,9 @@
   <div fxFlex *ngIf="dishes">
     <mat-grid-list cols="2" rowHeight="200px">
       <mat-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]">
-        <img height="200px" src="{{dish.image}}" alt={{dish.name}}>
+        <img height="200px" src="{{BaseURL + dish.image}}" alt={{dish.name}}>
         <mat-grid-tile-footer> 
-          <h1 md-line>{{dish.name | uppercase}}</h1>
+          <h1 mat-line>{{dish.name | uppercase}}</h1>
           <span style="color:black">{{ dish.price }} </span>
         </mat-grid-tile-footer> 
       </mat-grid-tile>
