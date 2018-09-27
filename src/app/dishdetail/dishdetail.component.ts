@@ -41,7 +41,7 @@ export class DishdetailComponent implements OnInit {
     private dishservice: DishService,
     private fb: FormBuilder,
     private route: ActivatedRoute, @Inject('BaseURL') private BaseURL) { }
-
+    errMess: string;
     ngOnInit() {
       this.createForm();
       this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
@@ -67,7 +67,8 @@ export class DishdetailComponent implements OnInit {
     });
 
     this.commentForm.valueChanges
-    .subscribe(data => this.onValueChanged(data));
+    .subscribe(data => this.onValueChanged(data),
+    errmess => this.errMess = <any>errmess);
 
     this.onValueChanged(); // (re)set validation messages
   }
