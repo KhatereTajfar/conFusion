@@ -21,7 +21,7 @@ export class DishdetailComponent implements OnInit {
   next: number;
   commentForm: FormGroup;
   comment: Comment;
-
+  dishcopy = null;
   formErrors = {
     'comment': '',
     'author': ''
@@ -42,11 +42,12 @@ export class DishdetailComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute, @Inject('BaseURL') private BaseURL) { }
     errMess: string;
+
     ngOnInit() {
       this.createForm();
       this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
       this.route.params.pipe(switchMap((params: Params) => this.dishservice.getDish(+params['id'])))
-      .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); });
+      .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id); });
     }
 
     setPrevNext(dishId: number) {
@@ -84,8 +85,9 @@ export class DishdetailComponent implements OnInit {
       date: ''
     });
 
-    this.dish.comments.push(this.comment);
-    // console.log(this.formErrors);
+    this.dishcopy.comments.push(this.comment);
+    this.dishcopy.save()
+      .subscribe(dish => { this.dish = dish; console.log(this.dish); });
   }
 
   onValueChanged(data?: any) {
